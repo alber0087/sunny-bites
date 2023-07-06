@@ -6,7 +6,7 @@ export default function ECommerceCard({ site }) {
   return (
     <Card
       imgAlt=""
-      imgSrc=""
+      imgSrc=''
       className='mb-4'
     >
       <a href="#">
