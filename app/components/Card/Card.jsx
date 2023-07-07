@@ -3,18 +3,19 @@
 import { Card, Rating } from 'flowbite-react';
 
 export default function ECommerceCard({ site }) {
+  
   return (
     <Card
-      imgAlt=""
-      imgSrc=''
-      className='mb-4'
+      imgAlt={site.photo?.images.caption}
+      imgSrc={site.photo?.images.medium.url}
+      className="mb-4"
     >
       <a href="#">
         <div className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
           {site.name}
         </div>
       </a>
-      <div className="mb-5 mt-2.5 flex items-center">
+      <div className="flex items-center">
         <Rating>
           <Rating.Star />
           <Rating.Star />
@@ -22,9 +23,13 @@ export default function ECommerceCard({ site }) {
           <Rating.Star />
           <Rating.Star />
           <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-            4.95 out of 5
+            {site.rating}
           </p>
         </Rating>
+      </div>
+      <div className="flex justify-between">
+        <p>Price</p>
+        {site?.price_level}
       </div>
       <div className="flex items-center justify-end">
         <a
@@ -35,5 +40,5 @@ export default function ECommerceCard({ site }) {
         </a>
       </div>
     </Card>
-  );
+  )
 }
