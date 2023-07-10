@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 
-async function fetchSites() {
+export async function fetchSites() {
 
 const bl_latitude = 11.847676
 const tr_latitude = 12.838442

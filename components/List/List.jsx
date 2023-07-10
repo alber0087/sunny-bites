@@ -1,6 +1,6 @@
 "use client";
 
-import ECommerceCard from "../Card/Card"
+import ECommerceCard from "../PlaceDetails/PlaceDetails"
 import { Dropdown } from "flowbite-react"
 import useSites from '@/app/hooks/useFetchSites'
 
@@ -39,16 +39,28 @@ function List() {
         </div>
         <div>
           <Dropdown inline label="Rating..." value={rating}>
-            <Dropdown.Item value={0} onChange={(e) => setRating(e.target.value)}>
+            <Dropdown.Item
+              value={0}
+              onChange={(e) => setRating(e.target.value)}
+            >
               All
             </Dropdown.Item>
-            <Dropdown.Item value={2} onChange={(e) => setRating(e.target.value)}>
+            <Dropdown.Item
+              value={2}
+              onChange={(e) => setRating(e.target.value)}
+            >
               Above 2.0
             </Dropdown.Item>
-            <Dropdown.Item value={3} onChange={(e) => setRating(e.target.value)}>
+            <Dropdown.Item
+              value={3}
+              onChange={(e) => setRating(e.target.value)}
+            >
               Above 3.0
             </Dropdown.Item>
-            <Dropdown.Item value={4} onChange={(e) => setRating(e.target.value)}>
+            <Dropdown.Item
+              value={4}
+              onChange={(e) => setRating(e.target.value)}
+            >
               Above 4.0
             </Dropdown.Item>
           </Dropdown>
@@ -56,11 +68,10 @@ function List() {
       </div>
 
       <div className="col-span-4 md:col-span-4">
-        {sites.map((site) => (
-          <div key={site.location_id}>
-            <ECommerceCard site={site} />
-          </div>
-        ))}
+        {sites &&
+          sites.map((site) => (
+            <ECommerceCard site={site} key={site.location_id} />
+          ))}
       </div>
     </div>
   )

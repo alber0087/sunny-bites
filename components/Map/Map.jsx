@@ -1,35 +1,34 @@
 
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
+import GoogleMapReact from "google-map-react"
 
-const containerStyle = {
-  width: "200%",
-  height: "800px",
-}
 
-const center = { lat: 44, lng: -80 }
+function MapContainer({ coordinates, setCoordinates, setBounds }) {
 
-function MapContainer() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-  })
-
-  if (!isLoaded) return <div>Loading...</div>
+  const mapStyle = {
+    width: '200%',
+    height: '90vh',
+    position: 'relative'
+  }
 
   return (
     <div>
       <div className="col-span-8 md:col-span-8 ">
-{/*         <LoadScript googleMapsApiKey={API_KEY}> */}
-          <GoogleMap 
-            mapContainerStyle={containerStyle} 
-            center={center} 
-            zoom={14}
-          >
-            <Marker position={center}/>
-          </GoogleMap>
-{/*         </LoadScript> */}
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+          }}
+          center={coordinates}
+          defaultCenter={coordinates}
+          defaultZoom={14}
+          style={mapStyle}
+          onChange={(e) => {
+            setCoordinates({lat: e.center.lat, lng: e.center.lng })
+            setBounds({ne: e.marginBounds.ne, sw: e.marginBounds.sw})
+          }}
+        ></GoogleMapReact>
       </div>
     </div>
-  );
+  )
 }
 
 export default MapContainer;
