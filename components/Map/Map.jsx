@@ -25,7 +25,7 @@ function MapContainer({ coordinates, setCoordinates, setBounds }) {
             setCoordinates({lat: e.center.lat, lng: e.center.lng })
             setBounds({ne: e.marginBounds.ne, sw: e.marginBounds.sw})
           }}
-        ></GoogleMapReact>
+        />
       </div>
     </div>
   )
