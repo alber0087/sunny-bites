@@ -2,9 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import Header from '@/app/components/Header/Header'
-import List from '@/app/components/List/List'
-import MapContainer from '@/app/components/Map/Map'
+import Header from '@/components/Header/Header'
+import MapContainer from '@/components/Map/Map'
+import List from '@/components/List/List'
 /* import Image from 'next/image' */
 
 const queryClient = new QueryClient()
