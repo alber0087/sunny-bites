@@ -2,10 +2,9 @@
 
 import ECommerceCard from "../PlaceDetails/PlaceDetails"
 import { Dropdown } from "flowbite-react"
-import useSites from '@/app/hooks/useFetchSites'
+import  {fetchSites}  from "@/app/page"
 
-function List() {
-  const { type, setType, rating, setRating, isLoading, isError, error, sites } = useSites()
+function List({ isLoading, isError, type, ratings, sites }) {
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -38,7 +37,7 @@ function List() {
           </Dropdown>
         </div>
         <div>
-          <Dropdown inline label="Rating..." value={rating}>
+          <Dropdown inline label="Rating..." value={ratings}>
             <Dropdown.Item
               value={0}
               onChange={(e) => setRating(e.target.value)}
