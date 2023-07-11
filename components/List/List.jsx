@@ -2,7 +2,8 @@
 
 import ECommerceCard from "../PlaceDetails/PlaceDetails"
 import { Dropdown } from "flowbite-react"
-import useSites from '@/app/hooks/useFetchSites'
+import useSites from '@/hooks/useFetchSites'
+
 
 function List() {
   const { type, setType, rating, setRating, isLoading, isError, error, sites } = useSites()
@@ -12,7 +13,7 @@ function List() {
   }
 
   if (isError) {
-    return <div>Error loading sites {error?.message}</div>
+    return <div>Error loading places {error?.message}</div>
   }
 
   return (
@@ -69,8 +70,8 @@ function List() {
 
       <div className="col-span-4 md:col-span-4">
         {sites &&
-          sites.map((site) => (
-            <ECommerceCard site={site} key={site.location_id} />
+          sites.map((site, idx) => (
+            <ECommerceCard site={site} key={idx} />
           ))}
       </div>
     </div>

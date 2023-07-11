@@ -1,8 +1,13 @@
 
 import GoogleMapReact from "google-map-react"
+import { useContext } from "react"
+import useDataContext from "@/hooks/useDataContext"
 
 
 function MapContainer({ coordinates, setCoordinates, setBounds }) {
+
+  const {setCoords} = useDataContext()
+  
 
   const mapStyle = {
     width: '200%',
@@ -24,6 +29,10 @@ function MapContainer({ coordinates, setCoordinates, setBounds }) {
           onChange={(e) => {
             setCoordinates({lat: e.center.lat, lng: e.center.lng })
             setBounds({ne: e.marginBounds.ne, sw: e.marginBounds.sw})
+            setCoords({
+              ne: e.marginBounds.ne,
+              sw: e.marginBounds.sw
+            })
           }}
         />
       </div>
