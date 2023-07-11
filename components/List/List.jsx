@@ -5,8 +5,8 @@ import { Dropdown } from "flowbite-react"
 import useSites from '@/hooks/useFetchSites'
 
 
-function List() {
-  const { type, setType, rating, setRating, isLoading, isError, error, sites } = useSites()
+function List({ type, ratings, setType, setRatings, setCoordinates }) {
+  const { isLoading, isError, error, sites } = useSites()
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -39,28 +39,28 @@ function List() {
           </Dropdown>
         </div>
         <div>
-          <Dropdown inline label="Rating..." value={rating}>
+          <Dropdown inline label="Rating..." value={ratings}>
             <Dropdown.Item
               value={0}
-              onChange={(e) => setRating(e.target.value)}
+              onClick={() => setRatings('')}
             >
               All
             </Dropdown.Item>
             <Dropdown.Item
               value={2}
-              onChange={(e) => setRating(e.target.value)}
+              onClick={() => setRatings(2)}
             >
               Above 2.0
             </Dropdown.Item>
             <Dropdown.Item
               value={3}
-              onChange={(e) => setRating(e.target.value)}
+              onClick={() => setRatings(3)}
             >
               Above 3.0
             </Dropdown.Item>
             <Dropdown.Item
               value={4}
-              onChange={(e) => setRating(e.target.value)}
+              onClick={() => setRatings(4)}
             >
               Above 4.0
             </Dropdown.Item>

@@ -17,7 +17,7 @@ export default function ECommerceCard({ site }) {
       </a>
       <div className="flex items-center">
         <Rating>
-          <Rating.Star />
+          <Rating.Star value={2}/>
           <Rating.Star />
           <Rating.Star />
           <Rating.Star />

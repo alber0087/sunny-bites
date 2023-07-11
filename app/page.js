@@ -13,12 +13,13 @@ import { DataContextProvider } from '@/context/DataContext'
 const queryClient = new QueryClient()
 
 export default function Home() {
+  const [places, setPlaces] = useState([])
+  const [filteredPlaces, setFilteredPlaces] = useState([])
   const [coordinates, setCoordinates] = useState({})
   const [bounds, setBounds] = useState(null)
   const [type, setType] = useState('restaurants')
   const [ratings, setRatings] = useState('')
 
-  const [places, setPlaces] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
 /*   if (isLoading) {
@@ -38,10 +39,14 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
+    const filteredData = places?.filter((place) => place.ratings > ratings)
+    setFilteredPlaces(filteredData)
+  }, [ratings])
+
+  useEffect(() => {
     if (bounds || []) {
       setIsLoading(true)
       fetchSites(bounds?.sw, bounds?.ne).then((data) => {
-        console.log(data)
         setPlaces(data)
         setIsLoading(false)
       })
@@ -51,10 +56,12 @@ export default function Home() {
   return (
     <DataContextProvider>
       <QueryClientProvider client={queryClient}>
-        <Header />
+        <Header
+          setCoordinates={setCoordinates}
+          />
         <div className="grid grid-cols-1 md:grid-cols-3 h-screen">
           <List
-            places={places}
+            places={filteredPlaces?.length ? filteredPlaces : places}
             setType={setType}
             setRatings={setRatings}
             setCoordinates={setCoordinates}

@@ -8,7 +8,6 @@ const queryClient = new QueryClient()
 /* const url = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary" */
 
 export async function fetchSites(sw, ne) {
-  console.log(sw, ne)
   try {
     const {
       data: { data },

@@ -1,7 +1,7 @@
 
 import NavbarWithDropdown from '../NavBar/NavBar'
 
-function Header() {
+function Header({ setCoordinates }) {
   return (
     <div className="bg-amber-500">
       <NavbarWithDropdown />

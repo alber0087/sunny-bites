@@ -1,18 +1,13 @@
-
-import GoogleMapReact from "google-map-react"
-import { useContext } from "react"
-import useDataContext from "@/hooks/useDataContext"
-
+import GoogleMapReact from 'google-map-react'
+import useDataContext from '@/hooks/useDataContext'
 
 function MapContainer({ coordinates, setCoordinates, setBounds }) {
-
-  const {setCoords} = useDataContext()
-  
+  const { setCoords } = useDataContext()
 
   const mapStyle = {
     width: '200%',
     height: '90vh',
-    position: 'relative'
+    position: 'relative',
   }
 
   return (
@@ -27,11 +22,11 @@ function MapContainer({ coordinates, setCoordinates, setBounds }) {
           defaultZoom={14}
           style={mapStyle}
           onChange={(e) => {
-            setCoordinates({lat: e.center.lat, lng: e.center.lng })
-            setBounds({ne: e.marginBounds.ne, sw: e.marginBounds.sw})
+            setCoordinates({ lat: e.center.lat, lng: e.center.lng })
+            setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw })
             setCoords({
               ne: e.marginBounds.ne,
-              sw: e.marginBounds.sw
+              sw: e.marginBounds.sw,
             })
           }}
         />
@@ -40,4 +35,4 @@ function MapContainer({ coordinates, setCoordinates, setBounds }) {
   )
 }
 
-export default MapContainer;
+export default MapContainer
