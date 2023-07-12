@@ -8,6 +8,7 @@ import List from '@/components/List/List'
 import { useEffect, useState } from 'react'
 import { fetchSites } from '@/hooks/useFetchSites'
 import { DataContextProvider } from '@/context/DataContext'
+
 /* import Image from 'next/image' */
 
 const queryClient = new QueryClient()
@@ -39,7 +40,7 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    const filteredData = places?.filter((place) => place.ratings > ratings)
+    const filteredData = places?.filter((place) => place.rating > ratings)
     setFilteredPlaces(filteredData)
   }, [ratings])
 
@@ -56,9 +57,6 @@ export default function Home() {
   return (
     <DataContextProvider>
       <QueryClientProvider client={queryClient}>
-        <Header
-          setCoordinates={setCoordinates}
-          />
         <div className="grid grid-cols-1 md:grid-cols-3 h-screen">
           <List
             places={filteredPlaces?.length ? filteredPlaces : places}
@@ -70,6 +68,7 @@ export default function Home() {
             setCoordinates={setCoordinates}
             coordinates={coordinates}
             setBounds={setBounds}
+            places={filteredPlaces.length ? filteredPlaces : places}
           />
         </div>
       </QueryClientProvider>

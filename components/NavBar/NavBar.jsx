@@ -1,11 +1,24 @@
 "use client";
 
 import { Dropdown, Navbar, Avatar } from "flowbite-react";
+import { Autocomplete } from '@react-google-maps/api'
+import Link from "next/link";
+import { useState } from "react";
 
-export default function NavbarWithDropdown() {
+export default function NavbarWithDropdown({ setCoordinates }) {
+  const [autocomplete, setAutocomplete] = useState(null)
+
+  const onLoad = (autoC) => setAutocomplete(autoC)
+
+  const onPlaceChanged = () => {
+    const lat = autocomplete.getPlace().geometry.location.lat()
+    const lng = autocomplete.getPlace().geometry.location.lng()
+    setCoordinates({ lat, lng })
+  }
+
   return (
     <Navbar fluid rounded className="bg-amber-500 text-white">
-      <Navbar.Brand href="#">
+      <Navbar.Brand href="/">
         <span className="self-center whitespace-nowrap text-3xl font-black">
           sunnyBites
         </span>
@@ -28,19 +41,20 @@ export default function NavbarWithDropdown() {
             </span>
           </Dropdown.Header>
           <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
+          <Dropdown.Item>
+            <Link href={'/profile'}>
+              Settings
+            </Link>
+          </Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <input
-          type="text"
-          id="search-navbar"
-          className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Search..."
-        />
+        <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+          <input type="text"/>
+        </Autocomplete>
         {/* <Navbar.Link href="#">Favourites</Navbar.Link> */}
       </Navbar.Collapse>
     </Navbar>

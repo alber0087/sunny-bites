@@ -17,12 +17,12 @@ function List({ type, ratings, setType, setRatings, setCoordinates }) {
   }
 
   return (
-    <div className="p-6 bg-amber-500">
+    <div className="p-6 bg-amber-500 max-w-md">
       <div className="mb-4 text-white font-bold text-base">
         <h2>The Best terraces around you...</h2>
       </div>
-      <div className="flex justify-evenly mb-4 bg-white font-bold text-base p-2 gap-6">
-        <div>
+      <div className="flex justify-evenly m-4 bg-white font-bold text-base p-2 max-w-md rounded-md">
+        <div className="">
           <Dropdown inline label="Filter by..." value={type}>
             <Dropdown.Item
               value="restaurants"

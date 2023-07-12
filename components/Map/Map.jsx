@@ -1,7 +1,8 @@
 import GoogleMapReact from 'google-map-react'
 import useDataContext from '@/hooks/useDataContext'
 
-function MapContainer({ coordinates, setCoordinates, setBounds }) {
+function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
+
   const { setCoords } = useDataContext()
 
   const mapStyle = {
@@ -18,7 +19,6 @@ function MapContainer({ coordinates, setCoordinates, setBounds }) {
             key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
           }}
           center={coordinates}
-          defaultCenter={coordinates}
           defaultZoom={14}
           style={mapStyle}
           onChange={(e) => {
@@ -29,7 +29,18 @@ function MapContainer({ coordinates, setCoordinates, setBounds }) {
               sw: e.marginBounds.sw,
             })
           }}
-        />
+        >
+          {places && places.map((place, i) => {
+            <div 
+              lat={Number(place.latitude)} 
+              lng={Number(place.longitud)}
+              position={'relative'}
+              cursor={'pointer'}
+            >
+              <IoLocation color='red' fontSize={30}/>
+            </div>
+          })}
+        </GoogleMapReact>
       </div>
     </div>
   )

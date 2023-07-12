@@ -5,7 +5,7 @@ import useDataContext from '@/hooks/useDataContext'
 
 const queryClient = new QueryClient()
 
-/* const url = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary" */
+const url = /* "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary" */''
 
 export async function fetchSites(sw, ne) {
   try {
@@ -26,7 +26,6 @@ export async function fetchSites(sw, ne) {
    return data
   } catch (error) {
     console.log(`Fetch data Error: ${error}`)
-    return null
   }
 }
 
