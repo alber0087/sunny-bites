@@ -2,12 +2,13 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import Header from '@/components/Header/Header'
 import MapContainer from '@/components/Map/Map'
 import List from '@/components/List/List'
 import { useEffect, useState } from 'react'
 import { fetchSites } from '@/hooks/useFetchSites'
 import { DataContextProvider } from '@/context/DataContext'
+
+import Head from 'next/head'
 
 /* import Image from 'next/image' */
 

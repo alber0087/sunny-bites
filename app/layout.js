@@ -15,9 +15,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-{/*         <script
+        <script
           src={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${API_KEY}`}
-        /> */}
+        />
         <Header />
         {children}
       </body>
