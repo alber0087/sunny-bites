@@ -5,13 +5,13 @@ import useDataContext from '@/hooks/useDataContext'
 
 const queryClient = new QueryClient()
 
-const url = /* "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary" */''
+const url = /* "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary" */'http://localhost:3000/api/localdata.js'
 
 export async function fetchSites(sw, ne) {
   try {
     const {
       data: { data },
-    } = await axios.get(url, {
+    } = await axios.get(url, /* {
       params: {
         bl_latitude: sw.lat,
         tr_latitude: ne.lat,
@@ -22,7 +22,7 @@ export async function fetchSites(sw, ne) {
         'X-RapidAPI-Key': '3aec6ecd4bmshe1eb0818fc5277cp17b368jsndf982a585105',
         'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
       },
-    })
+    } */)
    return data
   } catch (error) {
     console.log(`Fetch data Error: ${error}`)
@@ -31,6 +31,7 @@ export async function fetchSites(sw, ne) {
 
 function useSites() {  
   const {coords} = useDataContext()
+  
   const query = useQuery({
     queryKey: ['sites'],
     queryFn: async () => fetchSites(coords.sw, coords.ne),

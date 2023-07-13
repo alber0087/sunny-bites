@@ -68,7 +68,7 @@ export default function Home() {
             setCoordinates={setCoordinates}
             coordinates={coordinates}
             setBounds={setBounds}
-            places={filteredPlaces.length ? filteredPlaces : places}
+            places={filteredPlaces?.length ? filteredPlaces : places}
           />
         </div>
       </QueryClientProvider>
