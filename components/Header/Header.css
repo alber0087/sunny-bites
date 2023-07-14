@@ -1,10 +1,4 @@
-.header {
-  display: flex;
-  background-color: #FFB77F;
-  width: 90rem;
-  height: 6.25rem;
-  flex-shrink: 0;
-}
+
 
 .logo {
   color:  #FFF;

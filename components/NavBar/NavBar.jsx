@@ -4,23 +4,30 @@ import { Dropdown, Navbar, Avatar } from 'flowbite-react'
 import { Autocomplete } from '@react-google-maps/api'
 import Link from 'next/link'
 import { useState } from 'react'
+import useDataContext from '@/hooks/useDataContext'
 
 export default function NavbarWithDropdown() {
   const [autocomplete, setAutocomplete] = useState(null)
+
+  const { setFilterCoords } = useDataContext()
 
   const onLoad = (autoC) => setAutocomplete(autoC)
 
   const onPlaceChanged = () => {
     const lat = autocomplete.getPlace().geometry.location.lat()
     const lng = autocomplete.getPlace().geometry.location.lng()
-    setCoordinates({ lat, lng })
+    setFilterCoords({ lat, lng })
   }
+
   return (
-    <Navbar fluid rounded className="bg-amber-500 text-white">
+    <Navbar fluid rounded className="bg-red-500 text-white justify-center w-screen">
       <Navbar.Brand href="/">
         <span className="self-center whitespace-nowrap text-3xl font-black">
           sunnyBites
         </span>
+        <div className="text-white font-bold text-base justify-start mr-30 mt-2 ml-3">
+          <h2>The Best places around you.</h2>
+        </div>
       </Navbar.Brand>
       <div className="flex md:order-2">
         <Dropdown
@@ -48,6 +55,7 @@ export default function NavbarWithDropdown() {
         </Dropdown>
         <Navbar.Toggle />
       </div>
+
       <Navbar.Collapse>
         <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
           <div className="relative">
@@ -69,14 +77,13 @@ export default function NavbarWithDropdown() {
               </svg>
             </div>
             <input
-                type="text"
-                id="search-navbar"
-                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search..."
-              />
+              type="text"
+              id="search-navbar"
+              className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search..."
+            />
           </div>
         </Autocomplete>
-
         {/* <Navbar.Link href="#">Favourites</Navbar.Link> */}
       </Navbar.Collapse>
     </Navbar>

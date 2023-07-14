@@ -6,10 +6,6 @@ import MapContainer from '@/components/Map/Map'
 import List from '@/components/List/List'
 import { useEffect, useState } from 'react'
 import { fetchSites } from '@/hooks/useFetchSites'
-import { DataContextProvider } from '@/context/DataContext'
-
-import Head from 'next/head'
-
 /* import Image from 'next/image' */
 
 const queryClient = new QueryClient()
@@ -19,18 +15,11 @@ export default function Home() {
   const [filteredPlaces, setFilteredPlaces] = useState([])
   const [coordinates, setCoordinates] = useState({})
   const [bounds, setBounds] = useState(null)
+
   const [type, setType] = useState('restaurants')
   const [ratings, setRatings] = useState('')
 
-  const [isLoading, setIsLoading] = useState(false)
-
-/*   if (isLoading) {
-    return <div>Loading...</div>
-  }
-
-  if (isError) {
-    return <div>Error loading sites {error?.message}</div>
-  } */
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -46,17 +35,17 @@ export default function Home() {
   }, [ratings])
 
   useEffect(() => {
-    if (bounds || []) {
+    if (bounds) {
       setIsLoading(true)
-      fetchSites(bounds?.sw, bounds?.ne).then((data) => {
+      fetchSites(type, bounds?.sw, bounds?.ne).then((data) => {
         setPlaces(data)
         setIsLoading(false)
       })
     }
-  }, [coordinates, bounds])
+  }, [type, coordinates, bounds])
 
   return (
-    <DataContextProvider>
+    <>
       <QueryClientProvider client={queryClient}>
         <div className="grid grid-cols-1 md:grid-cols-3 h-screen">
           <List
@@ -64,6 +53,7 @@ export default function Home() {
             setType={setType}
             setRatings={setRatings}
             setCoordinates={setCoordinates}
+            isLoading={isLoading}
           />
           <MapContainer
             setCoordinates={setCoordinates}
@@ -73,6 +63,6 @@ export default function Home() {
           />
         </div>
       </QueryClientProvider>
-    </DataContextProvider>
+    </>
   )
 }
