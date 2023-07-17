@@ -60,8 +60,9 @@ function List({ setType, setRatings, places, isLoading }) {
       <div className="col-span-4 md:col-span-4">
         {
           places?.map((place, i) => (
-            isLoading ? <Skeleton key={i} /> : <ECommerceCard place={place} key={i} />
-          ))}
+            !place.name ? null : isLoading ? <Skeleton key={i} /> : <ECommerceCard place={place} key={i} /> 
+          ))
+        }
       </div>
     </div>
   )

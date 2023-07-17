@@ -6,6 +6,7 @@ import MapContainer from '@/components/Map/Map'
 import List from '@/components/List/List'
 import { useEffect, useState } from 'react'
 import { fetchSites } from '@/hooks/useFetchSites'
+import Switch from '@/components/Switch/Switch'
 /* import Image from 'next/image' */
 
 const queryClient = new QueryClient()
@@ -47,8 +48,9 @@ export default function Home() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <div className="grid grid-cols-1 md:grid-cols-3 h-screen">
+        <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-flow-col md:grid-cols-3 h-screen">
           <List
+            className='sm:w-screen bg-red-500'
             places={filteredPlaces?.length ? filteredPlaces : places}
             setType={setType}
             setRatings={setRatings}
@@ -61,6 +63,7 @@ export default function Home() {
             setBounds={setBounds}
             places={filteredPlaces?.length ? filteredPlaces : places}
           />
+          <Switch />
         </div>
       </QueryClientProvider>
     </>

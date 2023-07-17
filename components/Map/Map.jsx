@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react'
 import useDataContext from '@/hooks/useDataContext'
 import {IoMdPin } from 'react-icons/io'
 import {Card} from 'flowbite-react'
-
+import Image from 'next/image'
 
 function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
   const [isCard, setIsCard] = useState(false)
@@ -40,23 +40,35 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
             setIsCard(true)
           }}
         >
-          {places?.map((place, i) => (
-            <div
-              lat={Number(place.latitude)}
-              lng={Number(place.longitude)}
-              className="w-6 h-6 bg-red-300 relative cursor-pointer rounded-xl"
-            >
-              <IoMdPin className="w-8 h-8" />
-            </div>
-          ))}
+          {places?.map((place, i) =>
+            !place.name ? null : (
+              <div
+                lat={Number(place.latitude)}
+                lng={Number(place.longitude)}
+                className="w-6 h-6 bg-red-300 relative cursor-pointer rounded-xl"
+              >
+                <IoMdPin className="w-8 h-8 hover:text-gray-500 focus:text-gray-500" />
+              </div>
+            )
+          )}
           {isCard && (
-            <Card
-              className="w-50 h-60 absolute top-12 left-0 bg-white"
-              imgSrc={cardData.photo.images.medium.url}
+            <div
+              className="w-200 h-350 absolute top-12 left-0 bg-white rounded-xl"
+              imgSrc={cardData.photo.images.small.url}
               imgAlt={cardData.photo?.images.caption}
             >
-              {cardData.name}
-            </Card>
+              <Image 
+                src={cardData.photo.images.small.url} 
+                width={200}
+                height={150}
+                className='object-cover'
+              />
+              <div className='max-w-200 flex wrap justify-center text-lg p-2'>
+                <p className='w-200'>
+                  {cardData.name}
+                </p>
+              </div>
+            </div>
           )}
         </GoogleMapReact>
       </div>
