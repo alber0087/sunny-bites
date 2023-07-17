@@ -13,7 +13,7 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
 
   const mapStyle = {
     width: '200%',
-    height: 'calc(100vh - 4rem)',
+    height: '100vh',
     position: 'relative'
   }
 

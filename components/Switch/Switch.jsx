@@ -1,15 +1,16 @@
 import { Button } from 'flowbite-react'
 import React from 'react'
 
-export default function Switch() {
+export default function Switch({ showMap, toogleComponent }) {
   return (
-    <div className='relative w-20 h-10 bg-red-500 z-50'>
-      <Button 
-        onClick={() => {}}
-        color='dark'
+    <div className='flex justify-center'>
+      <Button
+        onClick={toogleComponent}
+        className="z-50 absolute bottom-24 w-24 font-bold"
+        color="dark"
         pill
       >
-        Map
+        {showMap ? 'Map' : 'Places'}
       </Button>
     </div>
   )

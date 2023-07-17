@@ -22,6 +22,9 @@ export default function Home() {
 
   const [isLoading, setIsLoading] = useState(true)
 
+  const [isMobile, setIsMobile] = useState(false)
+  const [showMap, setShowMap] = useState(false)
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
@@ -45,25 +48,44 @@ export default function Home() {
     }
   }, [type, coordinates, bounds])
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const toogleComponent = () => {
+    setShowMap(!showMap)
+  }
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-flow-col md:grid-cols-3 h-screen">
-          <List
-            className='sm:w-screen bg-red-500'
-            places={filteredPlaces?.length ? filteredPlaces : places}
-            setType={setType}
-            setRatings={setRatings}
-            setCoordinates={setCoordinates}
-            isLoading={isLoading}
-          />
-          <MapContainer
-            setCoordinates={setCoordinates}
-            coordinates={coordinates}
-            setBounds={setBounds}
-            places={filteredPlaces?.length ? filteredPlaces : places}
-          />
-          <Switch />
+          {isMobile && (
+            <Switch showMap={showMap} toogleComponent={toogleComponent} isMobile={isMobile} />
+          )}
+          {(!isMobile || showMap) && (
+            <List
+              places={filteredPlaces?.length ? filteredPlaces : places}
+              setType={setType}
+              setRatings={setRatings}
+              setCoordinates={setCoordinates}
+              isLoading={isLoading}
+            />
+          )} 
+          {(!isMobile || !showMap) && (
+            <MapContainer
+              setCoordinates={setCoordinates}
+              coordinates={coordinates}
+              setBounds={setBounds}
+              places={filteredPlaces?.length ? filteredPlaces : places}
+            />
+          )}
         </div>
       </QueryClientProvider>
     </>
