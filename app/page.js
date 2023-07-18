@@ -7,7 +7,6 @@ import List from '@/components/List/List'
 import { useEffect, useState } from 'react'
 import { fetchSites } from '@/hooks/useFetchSites'
 import Switch from '@/components/Switch/Switch'
-/* import Image from 'next/image' */
 
 const queryClient = new QueryClient()
 
