@@ -12,6 +12,8 @@ export default function ECommerceCard({ place }) {
     else return 'bg-orange-300'
   }
 
+  const ratingValue = parseInt(place.rating)
+
   return (
     <>
       <Card
@@ -27,7 +29,13 @@ export default function ECommerceCard({ place }) {
         <div className="flex items-center justify-between ">
           <div>
             <Rating>
-              <Rating.Star
+              {[1, 2, 3, 4, 5].map((index) => (
+                <Rating.Star key={index} filled={ratingValue >= index} />
+              ))}
+              <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                {place.rating}
+              </p>
+              {/*               <Rating.Star
                 filled={parseInt(place.rating) > 1.0 ? true : false}
               />
               <Rating.Star
@@ -44,7 +52,7 @@ export default function ECommerceCard({ place }) {
               />
               <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">
                 {place.rating}
-              </p>
+              </p> */}
             </Rating>
           </div>
           <div>{place.price_level}</div>
