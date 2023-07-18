@@ -2,7 +2,7 @@ import { useState } from 'react'
 import GoogleMapReact from 'google-map-react'
 import useDataContext from '@/hooks/useDataContext'
 import { IoMdPin } from 'react-icons/io'
-import Image from 'next/image'
+import SmallCard from '../SmallCard/SmallCard'
 
 function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
   const [isCard, setIsCard] = useState(false)
@@ -51,23 +51,7 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
             )
           )}
           {isCard && (
-            <div
-              className="w-200 h-350 absolute top-12 left-0 bg-white rounded-xl"
-              imgSrc={cardData.photo.images.small.url}
-              imgAlt={cardData.photo?.images.caption}
-            >
-              <Image 
-                src={cardData.photo.images.small.url} 
-                width={200}
-                height={150}
-                className='object-cover'
-              />
-              <div className='max-w-200 flex wrap justify-center text-lg p-2'>
-                <p className='w-200'>
-                  {cardData.name}
-                </p>
-              </div>
-            </div>
+            <SmallCard setCardData={setCardData} cardData={cardData}/>
           )}
         </GoogleMapReact>
       </div>
