@@ -2,13 +2,11 @@ import { useState } from 'react'
 import GoogleMapReact from 'google-map-react'
 import useDataContext from '@/hooks/useDataContext'
 import {IoMdPin } from 'react-icons/io'
-import {Card} from 'flowbite-react'
 import Image from 'next/image'
 
 function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
   const [isCard, setIsCard] = useState(false)
   const [cardData, setCardData] = useState(null)
-
   const { setCoords, filterCoords } = useDataContext()
 
   const mapStyle = {

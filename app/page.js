@@ -6,6 +6,7 @@ import MapContainer from '@/components/Map/Map'
 import List from '@/components/List/List'
 import { useEffect, useState } from 'react'
 import { fetchSites } from '@/hooks/useFetchSites'
+import useDataContext from '@/hooks/useDataContext'
 import Switch from '@/components/Switch/Switch'
 
 const queryClient = new QueryClient()
@@ -23,6 +24,8 @@ export default function Home() {
 
   const [isMobile, setIsMobile] = useState(false)
   const [showMap, setShowMap] = useState(false)
+
+  const { setCoords, filterCoords } = useDataContext()
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -66,17 +69,21 @@ export default function Home() {
       <QueryClientProvider client={queryClient}>
         <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-flow-col md:grid-cols-3 h-screen">
           {isMobile && (
-            <Switch showMap={showMap} toogleComponent={toogleComponent} isMobile={isMobile} />
+            <Switch
+              showMap={showMap}
+              toogleComponent={toogleComponent}
+              isMobile={isMobile}
+            />
           )}
           {(!isMobile || showMap) && (
             <List
               places={filteredPlaces?.length ? filteredPlaces : places}
               setType={setType}
               setRatings={setRatings}
-              setCoordinates={setCoordinates}
+              setCoordinates={filterCoords ? filterCoords : setCoordinates}
               isLoading={isLoading}
             />
-          )} 
+          )}
           {(!isMobile || !showMap) && (
             <MapContainer
               setCoordinates={setCoordinates}

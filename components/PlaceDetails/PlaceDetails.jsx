@@ -35,24 +35,6 @@ export default function ECommerceCard({ place }) {
               <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">
                 {place.rating}
               </p>
-              {/*               <Rating.Star
-                filled={parseInt(place.rating) > 1.0 ? true : false}
-              />
-              <Rating.Star
-                filled={parseInt(place.rating) > 2.0 ? true : false}
-              />
-              <Rating.Star
-                filled={parseInt(place.rating) > 3.0 ? true : false}
-              />
-              <Rating.Star
-                filled={parseInt(place.rating) > 4.0 ? true : false}
-              />
-              <Rating.Star
-                filled={parseInt(place.rating) === 5.0 ? true : false}
-              />
-              <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                {place.rating}
-              </p> */}
             </Rating>
           </div>
           <div>{place.price_level}</div>

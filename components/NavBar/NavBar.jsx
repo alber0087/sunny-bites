@@ -1,14 +1,14 @@
 'use client'
 
-import { Dropdown, Navbar, Avatar } from 'flowbite-react'
-import { Autocomplete } from '@react-google-maps/api'
-import Link from 'next/link'
 import { useState } from 'react'
+import { Autocomplete } from '@react-google-maps/api'
+import { Dropdown, Navbar, Avatar } from 'flowbite-react'
+
 import useDataContext from '@/hooks/useDataContext'
+import Link from 'next/link'
 
 export default function NavbarWithDropdown() {
   const [autocomplete, setAutocomplete] = useState(null)
-
   const { setFilterCoords } = useDataContext()
 
   const onLoad = (autoC) => setAutocomplete(autoC)

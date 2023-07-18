@@ -8,7 +8,7 @@ function List({ setType, setRatings, places, isLoading }) {
   return (
     <>
       <div className="flex flex-col items-center h-screen">
-        <div className="p-10 flex flex-col items-center">
+        <div className="px-12 py-6 flex flex-col items-center">
           <div className="sm:w-100 w-80 flex justify-between mb-4 font-bold text-base p-4 px-12 max-w-md rounded-md bg-red-500 text-white">
             <div className="">
               <Dropdown inline label="Filter by...">
