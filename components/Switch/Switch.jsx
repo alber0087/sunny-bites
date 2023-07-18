@@ -1,7 +1,13 @@
+import { IoMapOutline, IoBusinessOutline } from 'react-icons/io5'
 import { Button } from 'flowbite-react'
-import React from 'react'
 
 export default function Switch({ showMap, toogleComponent }) {
+
+  function changeView() {
+    if (showMap) { return <span className='flex items-center'>Map<IoMapOutline className='ml-2'/></span> } 
+    else { return <span className='flex items-center'>Places <IoBusinessOutline className='ml-2'/></span> }
+  }
+
   return (
     <div className='flex justify-center'>
       <Button
@@ -10,7 +16,7 @@ export default function Switch({ showMap, toogleComponent }) {
         color="dark"
         pill
       >
-        {showMap ? 'Map' : 'Places'}
+        {changeView()}
       </Button>
     </div>
   )

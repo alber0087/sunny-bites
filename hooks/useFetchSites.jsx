@@ -1,5 +1,4 @@
 
-
 import { QueryClient, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import useDataContext from '@/hooks/useDataContext'
@@ -35,11 +34,10 @@ export async function fetchSites(type, sw, ne) {
 }
 
 function useSites() {  
-
   const {coords} = useDataContext()
   
   const query = useQuery({
-    queryKey: ['hola'],
+    queryKey: ['sites'],
     queryFn: async () => fetchSites(coords.sw, coords.ne),
     retry: 6,
   })

@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import GoogleMapReact from 'google-map-react'
 import useDataContext from '@/hooks/useDataContext'
-import {IoMdPin } from 'react-icons/io'
+import { IoMdPin } from 'react-icons/io'
 import Image from 'next/image'
 
 function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
   const [isCard, setIsCard] = useState(false)
   const [cardData, setCardData] = useState(null)
+
   const { setCoords, filterCoords } = useDataContext()
 
   const mapStyle = {
-    width: '100%',
+    width: '200%',
     height: '100vh',
     position: 'relative',
   }
@@ -23,7 +24,7 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
             key: 'AIzaSyAw-aTPzbceFSmmS4_JNjSO0j7UHv4sgP4',
           }}
           center={filterCoords ? filterCoords : coordinates}
-          defaultZoom={14}
+          defaultZoom={16}
           style={mapStyle}
           onChange={(e) => {
             setCoordinates({ lat: e.center.lat, lng: e.center.lng })
