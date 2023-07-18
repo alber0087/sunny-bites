@@ -10,9 +10,9 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
   const { setCoords, filterCoords } = useDataContext()
 
   const mapStyle = {
-    width: '200%',
+    width: '100%',
     height: '100vh',
-    position: 'relative'
+    position: 'relative',
   }
 
   return (

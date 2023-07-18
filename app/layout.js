@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
       <Head>
         <title>sunnyBites</title>
       </Head>
-      <body className={`${inter.className} overflow-hidden`}>
+      <body className={`${inter.className}`}>
         <DataContextProvider>
           <script
             src={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${API_KEY}`}
