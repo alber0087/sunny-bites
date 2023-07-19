@@ -14,16 +14,19 @@ const queryClient = new QueryClient()
 export default function Home() {
   const [places, setPlaces] = useState([])
   const [filteredPlaces, setFilteredPlaces] = useState([])
+
   const [coordinates, setCoordinates] = useState({})
   const [bounds, setBounds] = useState(null)
 
   const [type, setType] = useState('restaurants')
   const [ratings, setRatings] = useState('')
-
-  const [isLoading, setIsLoading] = useState(true)
-
+  
   const [isMobile, setIsMobile] = useState(false)
   const [showMap, setShowMap] = useState(false)
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const [childClick, setChildClick] = useState(null)
 
   const { setCoords, filterCoords } = useDataContext()
 
@@ -82,6 +85,7 @@ export default function Home() {
               setRatings={setRatings}
               setCoordinates={filterCoords ? filterCoords : setCoordinates}
               isLoading={isLoading}
+              childClick={childClick}
             />
           )}
           {(!isMobile || !showMap) && (
@@ -90,6 +94,7 @@ export default function Home() {
               coordinates={coordinates}
               setBounds={setBounds}
               places={filteredPlaces?.length ? filteredPlaces : places}
+              setChildClick={setChildClick}
             />
           )}
         </div>

@@ -1,10 +1,18 @@
 'use client'
 
+import { useEffect, createRef, useState } from 'react'
 import ECommerceCard from '../PlaceDetails/PlaceDetails'
 import { Dropdown } from 'flowbite-react'
 import Skeleton from '../Skeleton/Skeleton'
 
-function List({ setType, setRatings, places, isLoading }) {
+function List({ setType, setRatings, places, isLoading, childClick }) {
+  const [elemRefs, setElemrefs] = useState([])
+
+  useEffect(() => {
+    const refs = Array(places?.length).fill().map((_, i) => elemRefs[i] || createRef())
+    setElemrefs(refs)
+  }, [places])
+
   return (
     <>
       <div className="flex flex-col items-center h-screen">
@@ -53,7 +61,12 @@ function List({ setType, setRatings, places, isLoading }) {
               !place.name ? null : isLoading ? (
                 <Skeleton key={i} />
               ) : (
-                <ECommerceCard place={place} key={i} />
+                <ECommerceCard 
+                  key={i} 
+                  place={place} 
+                  refProp={elemRefs[i]} 
+                  selected={Number(childClick) === i}
+                />
               )
             )}
           </div>

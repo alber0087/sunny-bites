@@ -4,7 +4,7 @@ import useDataContext from '@/hooks/useDataContext'
 import { IoMdPin } from 'react-icons/io'
 import SmallCard from '../SmallCard/SmallCard'
 
-function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
+function MapContainer({ coordinates, setCoordinates, setBounds, places, setChildClick }) {
   const [isCard, setIsCard] = useState(false)
   const [cardData, setCardData] = useState(null)
 
@@ -21,7 +21,7 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
       <div className="col-span-8 md:col-span-8">
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: 'AIzaSyAw-aTPzbceFSmmS4_JNjSO0j7UHv4sgP4',
+            key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
           }}
           center={filterCoords ? filterCoords : coordinates}
           defaultZoom={16}
@@ -35,6 +35,7 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
             })
           }}
           onChildClick={(child) => {
+            setChildClick(child)
             setCardData(places[child])
             setIsCard(true)
           }}
@@ -51,7 +52,7 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places }) {
             )
           )}
           {isCard && (
-            <SmallCard setCardData={setCardData} cardData={cardData}/>
+            <SmallCard setCardData={setCardData} cardData={cardData} />
           )}
         </GoogleMapReact>
       </div>

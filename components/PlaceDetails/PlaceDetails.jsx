@@ -2,8 +2,11 @@
 
 import { Card, Rating } from 'flowbite-react'
 import LikeBtn from '../LikeBtn/LikeBtn'
+import Link from 'next/link'
 
-export default function ECommerceCard({ place }) {
+export default function ECommerceCard({ place, selected, refProp  }) {
+  const ratingValue = parseInt(place.rating)
+
   const getAvailability = () => {
     if (!place.open_now_text) return ''
     if (place.open_now_text === 'Open Now') return 'bg-green-200'
@@ -12,7 +15,8 @@ export default function ECommerceCard({ place }) {
     else return 'bg-orange-300'
   }
 
-  const ratingValue = parseInt(place.rating)
+  if(selected) refProp?.current?.scrollIntoView({ behaviour: 'smooth', block: 'start' })
+
 
   return (
     <>
@@ -21,11 +25,11 @@ export default function ECommerceCard({ place }) {
         imgSrc={place.photo?.images.medium.url}
         className="mb-4 h-50"
       >
-        <a href="/">
+        <Link href={place.web_url ?? place.website}>
           <div className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
             {place.name}
           </div>
-        </a>
+        </Link>
         <div className="flex items-center justify-between ">
           <div>
             <Rating>
