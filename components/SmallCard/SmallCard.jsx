@@ -1,6 +1,5 @@
 'use client'
 
-import { Card } from 'flowbite-react'
 import Image from 'next/image'
 
 export default function SmallCard({ cardData, setCardData }) {
