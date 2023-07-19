@@ -26,9 +26,7 @@ export default function Home() {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const [childClick, setChildClick] = useState(null)
-
-  const { setCoords, filterCoords } = useDataContext()
+  const { filterCoords } = useDataContext()
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -46,6 +44,7 @@ export default function Home() {
   useEffect(() => {
     if (bounds) {
       setIsLoading(true)
+
       fetchSites(type, bounds?.sw, bounds?.ne).then((data) => {
         setPlaces(data)
         setIsLoading(false)
@@ -85,7 +84,6 @@ export default function Home() {
               setRatings={setRatings}
               setCoordinates={filterCoords ? filterCoords : setCoordinates}
               isLoading={isLoading}
-              childClick={childClick}
             />
           )}
           {(!isMobile || !showMap) && (
@@ -94,7 +92,7 @@ export default function Home() {
               coordinates={coordinates}
               setBounds={setBounds}
               places={filteredPlaces?.length ? filteredPlaces : places}
-              setChildClick={setChildClick}
+              isMobile={isMobile}
             />
           )}
         </div>

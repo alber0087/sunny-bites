@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function SmallCard({ cardData, setCardData }) {
+export default function SmallCard({ cardData }) {
 
   return (
     <div className="flex flex-col w-44 h-56 items-center bg-white absolute top-2 left-0 rounded-lg shadow-2xl">

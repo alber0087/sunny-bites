@@ -4,7 +4,7 @@ import { Card, Rating } from 'flowbite-react'
 import LikeBtn from '../LikeBtn/LikeBtn'
 import Link from 'next/link'
 
-export default function ECommerceCard({ place, selected, refProp  }) {
+export default function ECommerceCard({ place }) {
   const ratingValue = parseInt(place.rating)
 
   const getAvailability = () => {
@@ -14,9 +14,6 @@ export default function ECommerceCard({ place, selected, refProp  }) {
       return 'bg-red-300'
     else return 'bg-orange-300'
   }
-
-  if(selected) refProp?.current?.scrollIntoView({ behaviour: 'smooth', block: 'start' })
-
 
   return (
     <>

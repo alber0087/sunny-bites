@@ -4,21 +4,27 @@ import useDataContext from '@/hooks/useDataContext'
 import { IoMdPin } from 'react-icons/io'
 import SmallCard from '../SmallCard/SmallCard'
 
-function MapContainer({ coordinates, setCoordinates, setBounds, places, setChildClick }) {
+function MapContainer({ coordinates, setCoordinates, setBounds, places, isMobile }) {
   const [isCard, setIsCard] = useState(false)
   const [cardData, setCardData] = useState(null)
 
   const { setCoords, filterCoords } = useDataContext()
 
+  const handleMapClick = () => {
+    if (isCard) {
+      setIsCard(false)
+    }
+  }
+
   const mapStyle = {
-    width: '200%',
+    width: isMobile ? '100%' : '200%',
     height: '100vh',
     position: 'relative',
   }
 
   return (
     <div>
-      <div className="col-span-8 md:col-span-8">
+      <div className="col-span-8 md:col-span-8" onClick={handleMapClick}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -35,7 +41,6 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places, setChild
             })
           }}
           onChildClick={(child) => {
-            setChildClick(child)
             setCardData(places[child])
             setIsCard(true)
           }}
@@ -43,6 +48,7 @@ function MapContainer({ coordinates, setCoordinates, setBounds, places, setChild
           {places?.map((place, i) =>
             !place.name ? null : (
               <div
+                key={i}
                 lat={Number(place.latitude)}
                 lng={Number(place.longitude)}
                 className="w-6 h-6 bg-red-300 relative cursor-pointer rounded-xl"
