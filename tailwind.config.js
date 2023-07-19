@@ -7,5 +7,7 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   plugins: [require('flowbite/plugin')],
-  theme: {},
+  theme: {
+    import: ['custom-scrollbar.css'],
+  },
 }

@@ -1,79 +1,69 @@
-"use client";
+'use client'
 
-import ECommerceCard from "../PlaceDetails/PlaceDetails"
-import { Dropdown } from "flowbite-react"
-import useSites from '@/app/hooks/useFetchSites'
+import ECommerceCard from '../PlaceDetails/PlaceDetails'
+import { Dropdown } from 'flowbite-react'
+import Skeleton from '../Skeleton/Skeleton'
 
-function List() {
-  const { type, setType, rating, setRating, isLoading, isError, error, sites } = useSites()
-
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-
-  if (isError) {
-    return <div>Error loading sites {error?.message}</div>
-  }
+function List({ setType, setRatings, places, isLoading }) {
 
   return (
-    <div className="p-6 bg-amber-500">
-      <div className="mb-4 text-white font-bold text-base">
-        <h2>The Best terraces around you...</h2>
-      </div>
-      <div className="flex justify-evenly mb-4 bg-white font-bold text-base p-2 gap-6">
-        <div>
-          <Dropdown inline label="Filter by..." value={type}>
-            <Dropdown.Item
-              value="restaurants"
-              onChange={(e) => setType(e.target.value)}
-            >
-              Restaurants
-            </Dropdown.Item>
-            <Dropdown.Item
-              value="bars"
-              onChange={(e) => setType(e.target.value)}
-            >
-              Bars
-            </Dropdown.Item>
-          </Dropdown>
+    <>
+      <div className="flex flex-col items-center h-screen">
+        <div className="px-12 py-6 flex flex-col items-center overflow-auto">
+          <div className="sm:w-100 w-80 flex justify-between mb-4 font-bold text-base p-4 px-12 max-w-md rounded-md border-2 border-red-500 text-gray-700">
+            <div className="">
+              <Dropdown inline label="Filter by...">
+                <Dropdown.Item
+                  value="restaurants"
+                  onClick={() => setType('restaurants')}
+                >
+                  Restaurants
+                </Dropdown.Item>
+                <Dropdown.Item
+                  value="attractions"
+                  onClick={() => setType('attractions')}
+                >
+                  Attractions
+                </Dropdown.Item>
+              </Dropdown>
+            </div>
+            <div className="">
+              <Dropdown inline label="Rating...">
+                <Dropdown.Item
+                  value={0}
+                  onClick={() => {
+                    setRatings('')
+                  }}
+                >
+                  All
+                </Dropdown.Item>
+                <Dropdown.Item value={2} onClick={() => setRatings(2)}>
+                  Above 2.0
+                </Dropdown.Item>
+                <Dropdown.Item value={3} onClick={() => setRatings(3)}>
+                  Above 3.0
+                </Dropdown.Item>
+                <Dropdown.Item value={4} onClick={() => setRatings(4)}>
+                  Above 4.0
+                </Dropdown.Item>
+              </Dropdown>
+            </div>
+          </div>
+          <div className="overflow-scroll col-span-4 md:col-span-4 overflow-x-hidden">
+            {places?.map((place, i) =>
+              !place.name ? null : isLoading ? (
+                <Skeleton key={i} />
+              ) : (
+                <ECommerceCard 
+                  key={i} 
+                  place={place} 
+                />
+              )
+            )}
+          </div>
         </div>
-        <div>
-          <Dropdown inline label="Rating..." value={rating}>
-            <Dropdown.Item
-              value={0}
-              onChange={(e) => setRating(e.target.value)}
-            >
-              All
-            </Dropdown.Item>
-            <Dropdown.Item
-              value={2}
-              onChange={(e) => setRating(e.target.value)}
-            >
-              Above 2.0
-            </Dropdown.Item>
-            <Dropdown.Item
-              value={3}
-              onChange={(e) => setRating(e.target.value)}
-            >
-              Above 3.0
-            </Dropdown.Item>
-            <Dropdown.Item
-              value={4}
-              onChange={(e) => setRating(e.target.value)}
-            >
-              Above 4.0
-            </Dropdown.Item>
-          </Dropdown>
-        </div>
       </div>
-
-      <div className="col-span-4 md:col-span-4">
-        {sites &&
-          sites.map((site) => (
-            <ECommerceCard site={site} key={site.location_id} />
-          ))}
-      </div>
-    </div>
+    </>
   )
 }
 

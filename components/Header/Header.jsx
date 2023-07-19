@@ -2,8 +2,9 @@
 import NavbarWithDropdown from '../NavBar/NavBar'
 
 function Header() {
+
   return (
-    <div className="bg-amber-500">
+    <div className="h-22 bg-amber-500 flex items-end">
       <NavbarWithDropdown />
     </div>
   );
